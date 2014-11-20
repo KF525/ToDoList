@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>To Do List</title>
+
+  <style>
+    .done {text-decoration: line-through; }
+  </style>
+
+  <script>
+  //TO-DOs:
+  // Clean up what I have
+  // Be able to click and have the todo item strike through/done class
+  // Click a second time and have it disappear/remove child
+  // Have items remain until they are reset by clicking a button
+
+  window.onload = init;
+  //window.onload = testFunction;
+
+  function init() {
+    var submitToDo = document.getElementById("addButton");
+    submitToDo.onclick = function() {
+      addTask(event);
+    };
+  }
+
+  function addTask(event) {
+    event.preventDefault();
+    var task = document.getElementById("task");
+
+    if (task.value !== "") {
+      var newListItem = document.createElement("li");
+      newListItem.innerHTML = task.value;
+      var list = document.getElementById("list");
+      list.appendChild(newListItem);
+      task.value = "";
+      newListItem.onclick = itemDone;
+    }
+    else {
+      alert("Please enter a to-do item");
+    }
+  }
+
+  // function testFunction(){
+  //
+  //   var items = document.getElementsByTagName("li");
+  // 
+  //   for (var i = 0; i < items.length; i++) {
+  //     var item = items[i];
+  //     item.onclick = itemDone;
+  //     alert("This means it's happening!");
+  //     alert(item);
+  //   }
+  // }
+
+  function itemDone() {
+    this.className += "done";
+  }
+
+
+    //how do I target a specific li element?
+    //var item = document.getElementsByTagName("li");
+    // var item = document.getElementById("clean");
+    // item.setAttribute("class", "done");
+
+  </script>
+
+</head>
+<body>
+    <header><h1>Ada's ToDo list</h1></header>
+    <form>
+      To-Do: <input type="text" id="task">
+      <button id="addButton">Add Task</button>
+    </form>
+    <section>
+      <ol id="list">
+      </ol>
+    </section>
+</body>
+</html>

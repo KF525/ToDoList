@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>To Do List</title>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <style>
+    body { font-family: helvetica; }
+    .to-do { text-align: center; }
+    .done { text-decoration: line-through; }
+    .highlight { background-color: #f6ff00; }
+    button {background-color: #444; color: white; }
+    h1 {color: #444; font-size: 100px; text-align: center;}
+    section {background-color: #444; }
+    li {padding: 10px; color: white; text-align: center;}
+    .item {}
+    .edit {padding-left: 25%; }
+    .delete {color: yellow; }
+  </style>
+
+  <script>
+    $(function() {
+
+      $("#additem").click(function(e) {
+        e.preventDefault();
+        var myListItem = $("#task").val();
+
+        if (myListItem !== "" && myListItem !== null) {
+          var $newListItem = $("<li><span class='item'>" + myListItem + "</span><span class='Edit'>Edit</span><span class='delete'>Delete</span></li>");
+          $newListItem.children(".item").click(setDone);
+          $newListItem.children(".delete").click(deleteItem);
+          $("#list").append($newListItem);
+        }
+        else {
+          alert("Please enter in a to-do item");
+        }
+        $("#task").val(" ");
+      });
+
+      function setDone() {
+        $(".item").toggleClass("done");
+      }
+
+      function deleteItem(){
+        $(this).parent().remove();
+      }
+    });
+
+      // $("ol").on("click", ".item", function() {
+      //
+      // });
+      //
+      // $("ol").on("click", ".edit", function() {
+      //   var editItem = $(".item").get(0);
+      //   editItem.innerHTML = prompt("Edit your to-do");
+      // });
+
+      // $("li").click(function() {
+      //
+      //   console.log("I'm trying to click this");
+      // });
+
+      // $("li").click(function() {
+      //   $(".item").trigger("itemDone", $(this));
+      // });
+  </script>
+</head>
+
+<body>
+    <header><h1>to.do.list</h1></header>
+    <div class="to-do">
+      <form>
+        to.do <input type="text" id="task">
+        due.date <input type="text" id="date">
+        <button id="additem">Add Task</button>
+      </form>
+      <section>
+        <ol id="list">
+        </ol>
+      </section>
+    </div>
+</body>
+</html>
